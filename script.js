@@ -14,7 +14,17 @@ function deleteLast() {
 
 function calculateResult() {
   try {
-    display.value = eval(display.value);
+    let expression = display.value;
+
+    expression = expression.replace(/\+/g, "PLUS_TEMP");
+    expression = expression.replace(/-/g, "+");
+    expression = expression.replace(/PLUS_TEMP/g, "-");
+
+    expression = expression.replace(/\*/g, "MULTIPLY_TEMP");
+    expression = expression.replace(/\//g, "*");
+    expression = expression.replace(/MULTIPLY_TEMP/g, "/");
+
+    display.value = eval(expression);
   } catch (error) {
     display.value = "Error";
   }
